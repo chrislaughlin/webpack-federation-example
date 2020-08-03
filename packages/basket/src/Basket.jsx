@@ -1,17 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 
-const Basket = () => (
-    <div
-        style={{
-            height: "200px",
-            width: "200px",
-            background: "red",
-            color: "white",
-            fontSize: "xx-large",
-        }}
-    >
-        BASKET!
-    </div>
-);
+const StyledBasket = styled.div`
+  height: 200px;
+  width: 200px;
+  background: blue;
+  color: white;
+  font-size: xx-large;
+`;
+
+const Basket = () => {
+    return (
+        <StyledBasket>
+            BASKET!
+        </StyledBasket>
+    )
+};
 
 export default Basket;
