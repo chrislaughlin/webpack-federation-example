@@ -5,21 +5,36 @@ import Header from 'nav/build/Header';
 import Basket from 'basket/build/Basket';
 
 import "./index.css";
+import './app.css';
+import ProductList from "./productList";
 
 const App = () => {
-    const [showBasket, setShowBasket] = useState(false);
+    const [selected, setSelected] = useState([]);
+
+    const onBuyItem = item => {
+        setSelected(curr => [...curr, item]);
+    };
+
     return (
-        <div>
+        <div className="app">
             <Header />
-            <div>Hi there, I'm React from React.</div>
-            <button
-                onClick={() => setShowBasket(!showBasket)}
-            >
-                Toggle Basket
-            </button>
-            {
-                showBasket && <Basket/>
-            }
+            <h1>Hello World Store</h1>
+            <div className="app-content">
+                <section>
+                    <ProductList
+                        onBuyItem={onBuyItem}
+                    />
+                </section>
+                <section>
+                    {
+                        selected.length > 0 &&
+                        <Basket
+                            items={selected}
+                            onClear={() => setSelected([])}
+                        />
+                    }
+                </section>
+            </div>
         </div>
     )
 };

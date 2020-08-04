@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Guinness",
+        "price": "5.50"
+    },
+    {
+        "id": 2,
+        "name": "Magners",
+        "price": "4.50"
+    },
+    {
+        "id": 3,
+        "name": "Hop House",
+        "price": "5.00"
+    },
+    {
+        "id": 4,
+        "name": "Harp",
+        "price": "4.90"
+    },
+    {
+        "id": 5,
+        "name": "Murphy's",
+        "price": "5.50"
+    }
+]
