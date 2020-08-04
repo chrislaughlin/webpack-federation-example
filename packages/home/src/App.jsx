@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
@@ -66,12 +66,22 @@ class BasketWrapper extends React.Component {
   }
 }
 
-const App = () => (
-  <div>
-    <HeaderWrapper />
-    <div>Hi there, I'm React from React.</div>
-    <BasketWrapper/>
-  </div>
-);
+const App = () => {
+    const [showBasket, setShowBasket] = useState(false);
+    return (
+        <div>
+            <HeaderWrapper />
+            <div>Hi there, I'm React from React.</div>
+            <button
+                onClick={() => setShowBasket(!showBasket)}
+            >
+                Toggle Basket
+            </button>
+            {
+                showBasket && <BasketWrapper/>
+            }
+        </div>
+    )
+};
 
 ReactDOM.render(<App />, document.getElementById("app"));
