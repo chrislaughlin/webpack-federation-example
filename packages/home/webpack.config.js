@@ -1,5 +1,4 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 module.exports = {
   output: {
@@ -31,17 +30,6 @@ module.exports = {
   },
 
   plugins: [
-    new ModuleFederationPlugin({
-      name: "home",
-      library: { type: "var", name: "home" },
-      filename: "remoteEntry.js",
-      remotes: {
-        "mf-nav": "nav",
-        "mf-basket": "basket",
-      },
-      exposes: {},
-      shared: require("./package.json").dependencies,
-    }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),

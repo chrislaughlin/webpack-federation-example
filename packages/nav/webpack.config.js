@@ -1,5 +1,3 @@
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-
 module.exports = {
   output: {
     publicPath: "http://localhost:8081/",
@@ -25,16 +23,5 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "nav",
-      library: { type: "var", name: "nav" },
-      filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {
-        "./Header": "./src/Header",
-      },
-      shared: require("./package.json").dependencies,
-    }),
-  ],
+  plugins: [],
 };
