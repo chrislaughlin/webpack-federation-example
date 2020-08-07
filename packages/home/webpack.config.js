@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 module.exports = {
   output: {
@@ -33,5 +34,13 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
+    new ModuleFederationPlugin({
+      name: 'home',
+      library: { type: 'var', name: 'home'},
+      remotes: {
+        'mf-basket': 'basket'
+      },
+      shared: require('./package.json').dependencies
+    })
   ],
 };

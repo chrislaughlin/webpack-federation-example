@@ -5,7 +5,7 @@ import { reduce, pluck, add, map } from 'ramda';
 const StyledBasket = styled.div`
   height: 150px;
   width: 200px;
-  border: 1px solid red;
+  border: 10px solid pink;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -22,9 +22,10 @@ const totalPrice = items => {
 }
 
 const Basket = ({ items, onClear }) => {
+    throw new Error('fuck you');
     return (
         <StyledBasket>
-            <h3>BASKET</h3>
+            <h3>BASKET: updated</h3>
             <span>
                 PRODUCT COUNT: {items.length}
             </span>

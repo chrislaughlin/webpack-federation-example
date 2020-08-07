@@ -1,3 +1,5 @@
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
 module.exports = {
   output: {
     publicPath: "http://localhost:8082/",
@@ -23,5 +25,17 @@ module.exports = {
     ],
   },
 
-  plugins: [],
+  plugins: [
+      new ModuleFederationPlugin({
+        name: 'basket',
+        library: {
+          type: 'var', name: 'basket'
+        },
+        filename: 'remoteEntry.js',
+        exposes: {
+          './Basket': './src/Basket'
+        },
+        shared: require('./package.json').dependencies
+      })
+  ],
 };
