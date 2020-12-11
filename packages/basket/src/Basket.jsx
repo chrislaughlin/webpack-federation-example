@@ -22,10 +22,9 @@ const totalPrice = items => {
 }
 
 const Basket = ({ items, onClear }) => {
-    throw new Error('fuck you');
     return (
         <StyledBasket>
-            <h3>BASKET: updated</h3>
+            <h3>BASKET</h3>
             <span>
                 PRODUCT COUNT: {items.length}
             </span>

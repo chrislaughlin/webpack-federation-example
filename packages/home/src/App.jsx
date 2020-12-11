@@ -1,52 +1,12 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-import Header from 'nav/build/Header';
-// import Basket from 'basket/build/Basket';
-const BasketFallBack = React.lazy(() => import('basket/build/Basket'))
 const Basket = React.lazy(() => import('mf-basket/Basket'))
+const ProductList = React.lazy(() => import('mf-productList/ProductList'))
 
 import "./index.css";
 import './app.css';
-import ProductList from "./productList";
-
-class BasketWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { hasError: false};
-    }
-
-    static getDerivedStateFromError() {
-        return { hasError: true}
-    }
-
-    render() {
-        const {
-            selected,
-            setSelected
-        } = this.props;
-
-        if (this.state.hasError) {
-            return (
-                <React.Suspense fallback={<div>....loading basket fall back</div>}>
-                    <BasketFallBack
-                        items={selected}
-                        onClear={() => setSelected([])}
-                    />
-                </React.Suspense>
-            )
-        }
-
-        return (
-            <React.Suspense fallback={<div>....loading basket</div>}>
-                <Basket
-                    items={selected}
-                    onClear={() => setSelected([])}
-                />
-            </React.Suspense>
-        )
-    }
-}
+import './productList.css';
 
 const App = () => {
     const [selected, setSelected] = useState([]);
@@ -57,21 +17,24 @@ const App = () => {
 
     return (
         <div className="app">
-            <Header />
-            <h1>Hello World Store</h1>
+            <h1>Pizza Store</h1>
             <div className="app-content">
                 <section>
-                    <ProductList
-                        onBuyItem={onBuyItem}
-                    />
+                    <React.Suspense fallback={<div>....loading product list</div>}>
+                        <ProductList
+                            onBuyItem={onBuyItem}
+                        />
+                    </React.Suspense>
                 </section>
                 <section>
                     {
                         selected.length > 0 &&
-                        <BasketWrapper
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        <React.Suspense fallback={<div>....loading basket</div>}>
+                            <Basket
+                                items={selected}
+                                onClear={() => setSelected([])}
+                            />
+                        </React.Suspense>
                     }
                 </section>
             </div>

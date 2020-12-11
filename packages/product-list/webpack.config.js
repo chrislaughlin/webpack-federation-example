@@ -1,9 +1,8 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 module.exports = {
   output: {
-    publicPath: "http://localhost:8080/",
+    publicPath: "http://localhost:8081/",
   },
 
   resolve: {
@@ -11,15 +10,11 @@ module.exports = {
   },
 
   devServer: {
-    port: 8080,
+    port: 8081,
   },
 
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -31,15 +26,14 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-    }),
     new ModuleFederationPlugin({
-      name: 'home',
-      library: { type: 'var', name: 'home'},
-      remotes: {
-        'mf-basket': 'basket',
-        'mf-productList': 'productList'
+      name: 'productList',
+      library: {
+        type: 'var', name: 'productList'
+      },
+      filename: 'remoteEntry.js',
+      exposes: {
+        './ProductList': './src/ProductList'
       },
       shared: require('./package.json').dependencies
     })
